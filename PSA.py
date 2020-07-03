@@ -9,6 +9,7 @@ if __name__ == "__main__":
     MODE = PSAMode.Full
 
     if len(sys.argv) > 2:
+        url = sys.argv[1]
         if sys.argv[2].lower() == "latest":
             MODE = PSAMode.Latest
         else:
