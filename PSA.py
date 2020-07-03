@@ -6,15 +6,16 @@ from psaripper.PSAEntry import PSAEntry
 SCRAPER = cfscrape.create_scraper()
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        url = sys.argv[1]
-
     MODE = PSAMode.Full
+
     if len(sys.argv) > 2:
         if sys.argv[2].lower() == "latest":
             MODE = PSAMode.Latest
         else:
             MODE = PSAMode.Full
+
+    elif len(sys.argv) > 1:
+        url = sys.argv[1]
 
     else:
         url = input("Enter a PSA url - ")
