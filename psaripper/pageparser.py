@@ -1,10 +1,11 @@
 from psaripper.util import get_media_type
 from psaripper.PSAMedia import PSAMedia, PSAMode
+from psaripper.metadata import ShowMetadata
 from bs4 import BeautifulSoup
 
 def parse_page(url, scraper, mode):
     result = scraper.get(url)
-    return scrape_page(result, get_media_type(url), mode)
+    return scrape_page(result, get_media_type(url), mode), ShowMetadata(result)
 
 def scrape_page(result, mediatype, mode = PSAMode.Full):
     if mediatype == PSAMedia.TVShow:

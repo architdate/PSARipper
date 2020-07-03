@@ -1,5 +1,6 @@
 import base64, cfscrape
 from psaripper.util import decrypt_url
+from psaripper.metadata import EpisodeMetadata
 
 class PSAEntry:
     def __init__(self, entry, scraper):
@@ -40,3 +41,6 @@ class PSAEntry:
             self.scraper = cfscrape.create_scraper()
             torrenturl = decrypt_url(torrent, self.scraper)
         return torrenturl
+
+    def get_metadata(self):
+        return EpisodeMetadata(self.title)
