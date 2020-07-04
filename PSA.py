@@ -1,30 +1,35 @@
-import cfscrape, sys
+import cfscrape, sys, os
 from psaripper.pageparser import parse_page
 from psaripper.metadata import Hosters
 from psaripper.PSAMedia import PSAMode
 from psaripper.PSAEntry import PSAEntry
+from psaripper.dump import get_hoster_dictionary, pretty_print, pretty_print_torr
 
 SCRAPER = cfscrape.create_scraper()
+
+def mode_parse(arg):
+    arg = arg.strip().lower()
+    if arg == "latest":
+        return PSAMode.Latest
+    elif arg == "1080p" or arg == "fhd":
+        return PSAMode.FHD
+    elif arg == "720p" or arg == "hd":
+        return PSAMode.HD
+    return PSAMode.Full
 
 if __name__ == "__main__":
     MODE = PSAMode.Full
 
     if len(sys.argv) > 2:
         url = sys.argv[1]
-        if sys.argv[2].lower() == "latest":
-            MODE = PSAMode.Latest
-        elif sys.argv[2].lower() == "1080p" or sys.argv[2].lower() == "fhd":
-            MODE = PSAMode.FHD
-        elif sys.argv[2].lower() == "720p" or sys.argv[2].lower() == "hd":
-            MODE = PSAMode.HD
-        else:
-            MODE = PSAMode.Full
+        MODE = mode_parse(sys.argv[2])
 
     elif len(sys.argv) > 1:
         url = sys.argv[1]
 
     else:
         url = input("Enter a PSA url - ")
+        MODE = mode_parse(input("Enter download mode (latest/full/1080p/720p) - "))
 
     entries, metadata = parse_page(url, SCRAPER, MODE)
     if entries == None:
@@ -32,9 +37,21 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     entries.reverse()
-    print(f"Show: {metadata.get_show_title()}\nRating: {metadata.get_rating()}\n\n")
+    showtitle = metadata.get_show_title()
+    print(f"\nShow: {showtitle}\nRating: {metadata.get_rating()}\n")
+    entry_json = {"Torrent": {}, "DDL": {}}
     for entry in entries:
         media = PSAEntry(entry, SCRAPER)
+        title = media.title
         metadata = media.get_metadata()
         ddlurls = media.get_ddl_urls()
-        print(f"Title - {media.title}\nResolution - {metadata.get_resolution()}p\nChannels - {metadata.get_channel()} channels\nEncoding - x{metadata.get_encoding()}\n\nDDL - {ddlurls}\nTorrent - {media.get_torrent_urls()}\n\n")
+        torrurls = media.get_torrent_urls()
+        entry_json["Torrent"][title] = torrurls
+        entry_json["DDL"][title] = ddlurls
+        
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    os.makedirs('output', exist_ok=True)
+    with open(f'output/{showtitle}.log', 'w') as f:
+        ddl_out = get_hoster_dictionary(entry_json["DDL"])
+        f.write(pretty_print(ddl_out) + '\n\n' + pretty_print_torr(entry_json["Torrent"]))
+        print(f"URLs saved here: {os.path.join(os.getcwd(), 'output', showtitle + '.log')}")
