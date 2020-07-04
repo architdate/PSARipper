@@ -1,4 +1,4 @@
-import cfscrape, sys, os
+import cfscrape, sys, os, urllib
 from psaripper.pageparser import parse_page
 from psaripper.metadata import Hosters
 from psaripper.PSAMedia import PSAMode
@@ -29,6 +29,7 @@ if __name__ == "__main__":
 
     else:
         url = input("Enter a PSA url - ")
+        urllib.parse.quote(url)
         MODE = mode_parse(input("Enter download mode (latest/full/1080p/720p) - "))
 
     entries, metadata = parse_page(url, SCRAPER, MODE)
