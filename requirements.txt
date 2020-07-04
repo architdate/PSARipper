@@ -2,3 +2,7 @@ requests
 beautifulsoup4
 cfscrape
 lxml
+
+# RSS feed
+feedparser
+feedgen

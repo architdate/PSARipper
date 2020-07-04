@@ -3,6 +3,7 @@ from psaripper.pageparser import parse_page
 from psaripper.metadata import Hosters
 from psaripper.PSAMedia import PSAMode
 from psaripper.PSAEntry import PSAEntry
+from psaripper.rss import get_psa_feed, generate_feed
 from psaripper.dump import get_hoster_dictionary, pretty_print, pretty_print_torr
 
 SCRAPER = cfscrape.create_scraper()
@@ -19,6 +20,15 @@ def mode_parse(arg):
 
 if __name__ == "__main__":
     MODE = PSAMode.Full
+
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    os.makedirs('output', exist_ok=True)
+    if '--rss' in sys.argv:
+        feed = get_psa_feed()
+        rss = generate_feed(feed)
+        with open('output/rss.xml', 'wb') as f:
+            f.write(rss)
+        sys.exit(0)
 
     if len(sys.argv) > 2:
         url = sys.argv[1]
@@ -49,8 +59,6 @@ if __name__ == "__main__":
         entry_json["Torrent"][title] = torrurls
         entry_json["DDL"][title] = ddlurls
         
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    os.makedirs('output', exist_ok=True)
     with open(f'output/{showtitle}.log', 'w') as f:
         ddl_out = get_hoster_dictionary(entry_json["DDL"])
         f.write(pretty_print(ddl_out) + '\n\n' + pretty_print_torr(entry_json["Torrent"]))
