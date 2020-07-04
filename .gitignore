@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# RSS feeds
+*.xml
+
 # Distribution / packaging
 .Python
 build/

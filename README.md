@@ -19,7 +19,15 @@ $ python PSA.py <OPTIONAL: url> <OPTIONAL: mode>
 ```
 - url: the PSA url that you want to rip. If unspecified, the script will ask you for a URL.
 - mode: can either be `latest`, `full`, `1080p`, `720p`. Latest will bypass shortners of just the latest episode (incase of a TV show). Full will bypass the shortners of every episode. This setting does not matter for movies. If nothing is specified, the script will ask you for a mode.
-- The output will be stored as a `.log` file (can be viewed by any text editor) in the output folder
+- The output will be stored as a `.log` file (can be viewed by any text editor) in the `output` folder
+
+## RSS Feed:
+
+You can generate an RSS feed of the bypassed URLs by running the following command
+```bash
+$ python PSA.py --rss
+```
+The rss feed will be saved as `rss.xml` in the `output` folder
 
 ## Contributing:
 
