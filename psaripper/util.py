@@ -1,4 +1,4 @@
-import requests, time, base64
+import requests, time, base64, cfscrape
 from bs4 import BeautifulSoup
 from psaripper.PSAMedia import PSAMedia
 
@@ -33,8 +33,11 @@ def get_urls(url):
         return [url]
 
 def decrypt_url(url, scraper):
-    urlr = scraper.get(url, allow_redirects=False, headers=get_headers())
-    furl = base64.b64decode(urlr.text.split("url\' value=")[1].split('/>')[0].strip()).decode('utf-8')
+    urlt = "must-revalidate"
+    while "must-revalidate" in urlt:
+        urlr = scraper.get(url, allow_redirects=False, headers=get_headers())
+        urlt = urlr.text
+    furl = base64.b64decode(urlt.split("url\' value=")[1].split('/>')[0].strip()).decode('utf-8')
     return get_urls(furl)
 
 def get_media_type(url):

@@ -1,11 +1,17 @@
 from psaripper.util import get_media_type
 from psaripper.PSAMedia import PSAMedia, PSAMode
-from psaripper.metadata import ShowMetadata
+from psaripper.metadata import ShowMetadata, EpisodeMetadata
 from bs4 import BeautifulSoup
 
 def parse_page(url, scraper, mode):
     result = scraper.get(url)
-    return scrape_page(result, get_media_type(url), mode), ShowMetadata(result)
+    scrape = scrape_page(result, get_media_type(url), mode), ShowMetadata(result)
+    if mode == PSAMode.Full or mode == PSAMode.Latest:
+        return scrape
+    elif mode == PSAMode.FHD:
+        return [x for x in scrape[0] if EpisodeMetadata(x[0]).get_resolution() == 1080], scrape[1]
+    elif mode == PSAMode.HD:
+        return [x for x in scrape[0] if EpisodeMetadata(x[0]).get_resolution() == 720], scrape[1]
 
 def scrape_page(result, mediatype, mode = PSAMode.Full):
     if mediatype == PSAMedia.TVShow:
@@ -23,7 +29,7 @@ def scrape_page(result, mediatype, mode = PSAMode.Full):
                 elif search_string != "\n":
                     all_entries.append(search_string)
                 search_string = search_string.next_sibling
-        elif mode == PSAMode.Full:
+        elif mode == PSAMode.Full or mode == PSAMode.FHD or mode == PSAMode.HD:
             all_entries = entries[0].find_all("div", "sp-wrap sp-wrap-steelblue")
         else: # undefined mode
             return None 

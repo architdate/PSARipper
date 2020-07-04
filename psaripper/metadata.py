@@ -1,3 +1,4 @@
+from enum import Enum
 
 class EpisodeMetadata:
     def __init__(self, title):
@@ -36,3 +37,27 @@ class ShowMetadata:
             return float(self.text.split("wpdrv'>")[1].split('<')[0])
         except:
             return -1
+
+class Hosters(Enum):
+    PSARips = "download.psarips.net"
+    UpToBox = "uptobox.com"
+    Mega = "mega.nz"
+    KatFile = "katfile.com"
+    ClicknUpload = "clicknupload.co"
+    NitroFlare = "nitroflare.com"
+    Earn4Files = "earn4files.com"
+    DropAPK = "dropapk.to"
+    Uploader = "uploader.link"
+    MegaUp = "megaup.net"
+    DDownload = "ddownload.com"
+    BayFiles = "bayfiles.com"
+    AnonFiles = "anonfiles.com"
+    SpeedDown = "speed-down.org"
+    Unknown = "zyzzyspoonshift1" # :P
+
+    @classmethod
+    def getHoster(cls, url):
+        for hoster in cls:
+            if hoster.value in url:
+                return hoster
+        return cls.Unknown

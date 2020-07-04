@@ -7,3 +7,5 @@ class PSAMedia(Enum):
 class PSAMode(Enum):
     Full = 1
     Latest = 2
+    FHD = 3
+    HD = 4

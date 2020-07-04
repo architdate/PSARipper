@@ -8,6 +8,7 @@ class PSAEntry:
         self.scraper = scraper
         self.title = self.entry[0]
         self.torr_index = 1
+        self.DEBUG = False
 
     def get_ddl_parts(self, entry):
         all_parts = self.entry[1].find_all('div', class_='dropshadowboxes-container')
@@ -21,7 +22,8 @@ class PSAEntry:
                 ddlurl = decrypt_url(ddl[1], self.scraper)
                 ddl_urls[ddl[0]] = ddlurl
             except:
-                print("[DEBUG] Cookie Flagged! Refreshing scraper")
+                if self.DEBUG:
+                    print("[DEBUG] Cookie Flagged! Refreshing scraper")
                 self.scraper = cfscrape.create_scraper() # assign a new scraper, so new cookie??
                 ddlurl = decrypt_url(ddl[1], self.scraper)
                 ddl_urls[ddl[0]] = ddlurl
