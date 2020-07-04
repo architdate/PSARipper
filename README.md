@@ -38,6 +38,6 @@ For documentation purposes, the following have been their changelog of my code s
 
 > Patched Third bypass; New vulnerability: Response bytes of the /exit/ url once decoded via utf8 returns a base64 of the final location
 
-> Patched public script; Added revalidation with a redirect if no cache was present. Easy enough to break, just call via cfscrape again, this time the session has a cache and should be able to view the underlying url just fine without any unnecessary 302s  
+> 4/7/2020; 5:20 PM SGT: Patched public script; Added revalidation with a redirect if no cache was present. Easy enough to break, just call via cfscrape again, this time the session has a cache and should be able to view the underlying url just fine without any unnecessary 302s  
 
-Cant wait for PSA to patch this so I can break it again :))
+The script so far has been patched unsuccessfully `4` times. 
