@@ -1,6 +1,6 @@
 # PSARipper
 
-> This script is currently PATCHED by psarips.xyz. Their /exit/ gateway now directly has the shortner link instead of the base64 url. Will remove this notice once I figure out a way to bypass this hurdle and update the code. For now however, this script has been patched. My thinking is that they are probably dynamically generating their /exit/ gateway page serverside by doing a lookup on their database and randomizing and returning a shortner link. Pretty nifty way to stop this script, gotta admit. Good job, PSA team. :)
+> This script is currently PATCHED by psarips.xyz. Their /exit/ gateway now directly has the shortner link instead of the base64 url. Will remove this notice once I figure out a way to bypass this hurdle and update the code. For now however, this script has been patched. My thinking is that they are probably dynamically generating their /exit/ gateway page serverside by doing a lookup on their database and randomizing and returning a shortner link. Pretty nifty way to stop this script, gotta admit. Also I see the "canttouchthis" at the end of the decoded base64 in the exit url :P. Good job, PSA team. :)
 
 Shortner Bypass for PSARips (psarips.xyz) and associated mirrors
 
