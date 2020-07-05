@@ -1,5 +1,7 @@
 # PSARipper
 
+> This script is currently PATCHED by psarips.xyz. Their /exit/ gateway now directly has the shortner link instead of the base64 url. Will remove this notice once I figure out a way to bypass this hurdle and update the code. For now however, this script has been patched. My thinking is that they are probably dynamically generating their /exit/ gateway page serverside by doing a lookup on their database and randomizing and returning a shortner link. Pretty nifty way to stop this script, gotta admit. Good job, PSA team. :)
+
 Shortner Bypass for PSARips (psarips.xyz) and associated mirrors
 
 CLI tool to bypass the PSA shortner links and return the final list of all the hosters hosting the episodes
@@ -47,6 +49,8 @@ For documentation purposes, the following have been their changelog of my code s
 
 > Patched Third bypass; New vulnerability: Response bytes of the /exit/ url once decoded via utf8 returns a base64 of the final location
 
-> 4/7/2020; 5:20 PM SGT: Patched public script; Added revalidation with a redirect if no cache was present. Easy enough to break, just call via cfscrape again, this time the session has a cache and should be able to view the underlying url just fine without any unnecessary 302s  
+> 4/7/2020; 5:20 PM SGT: Patched public script; Added revalidation with a redirect if no cache was present. Easy enough to break, just call via cfscrape again, this time the session has a cache and should be able to view the underlying url just fine without any unnecessary 302s
+
+> 5/7/2020; 3:00 PM SGT: Patched script
 
 The script so far has been patched unsuccessfully `4` times. 
