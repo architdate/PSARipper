@@ -58,6 +58,7 @@ if __name__ == "__main__":
         torrurls = media.get_torrent_urls()
         entry_json["Torrent"][title] = torrurls
         entry_json["DDL"][title] = ddlurls
+        print(f"Processed - {title}")
         
     with open(f'output/{showtitle}.log', 'w') as f:
         ddl_out = get_hoster_dictionary(entry_json["DDL"])
