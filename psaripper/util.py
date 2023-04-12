@@ -1,7 +1,7 @@
 import base64
 import re
 from datetime import datetime
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote
 
 import cfscrape
 import requests
@@ -11,10 +11,12 @@ from psaripper.PSAMedia import PSAMedia
 
 
 def create_scraper(**kwargs):
-    today = datetime.today().strftime("%Y%m%d")
-    today_2 = base64.b64encode(datetime.today().strftime("%d%m%y").encode()).decode()
+    today = datetime.utcnow().strftime("%Y%m%d")
+    today_2 = base64.b64encode(datetime.utcnow().strftime("%d%m%y").encode()).decode()
+    visit_cnt = 5
+    visit_cnt = quote(base64.b64encode(str(visit_cnt).encode()).decode())
     headers = {
-        "Cookie": f"clks={today}; ez4s={int(today)+1}; LstVstD={today_2}; shrnkio={today}; try2={today}; VstCnt=NQ%3D%3D;",
+        "Cookie": f"clks={today}; ez4s={int(today)+1}; LstVstD={today_2}; shrnkio={today}; try2={today}; VstCnt={visit_cnt};",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
     }
     headers.update(kwargs)
