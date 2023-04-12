@@ -1,6 +1,4 @@
-# [Patched] PSARipper
-
-> This script is currently PATCHED by psa.re. Their /exit/ gateway now directly has the shortner link instead of the base64 url. Will remove this notice once I figure out a way to bypass this hurdle and update the code. For now however, this script has been patched. My thinking is that they are probably dynamically generating their /exit/ gateway page serverside by doing a lookup on their database and randomizing and returning a shortner link. Pretty nifty way to stop this script, gotta admit. Also I see the "canttouchthis" at the end of the decoded base64 in the exit url :P. Good job, PSA team. :)
+# PSARipper
 
 Shortner Bypass for PSARips (psa.re) and associated mirrors
 
@@ -51,6 +49,6 @@ For documentation purposes, the following have been their changelog of my code s
 
 > 4/7/2020; 5:20 PM SGT: Patched public script; Added revalidation with a redirect if no cache was present. Easy enough to break, just call via cfscrape again, this time the session has a cache and should be able to view the underlying url just fine without any unnecessary 302s
 
-> 5/7/2020; 3:00 PM SGT: Patched script
+> Exploit ouo.io shortner by forcing generation of OUO links on the 6th VstCnt through forced cookie injection. Thanks @Loli-Killer . Finally bypassed it again :)
 
-The script so far has been patched unsuccessfully `4` times. 
+The script so far has been patched unsuccessfully `5` times. 
