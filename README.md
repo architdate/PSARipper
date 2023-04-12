@@ -49,6 +49,6 @@ For documentation purposes, the following have been their changelog of my code s
 
 > 4/7/2020; 5:20 PM SGT: Patched public script; Added revalidation with a redirect if no cache was present. Easy enough to break, just call via cfscrape again, this time the session has a cache and should be able to view the underlying url just fine without any unnecessary 302s
 
-> Exploit ouo.io shortner by forcing generation of OUO links on the 6th VstCnt through forced cookie injection. Thanks @Loli-Killer . Finally bypassed it again :)
+> 13/4/2023; 1:02 AM SGT: Exploit ouo.io shortner by forcing generation of OUO links on the 5th VstCnt through forced cookie injection. Thanks @Loli-Killer . Finally bypassed it again :)
 
 The script so far has been patched unsuccessfully `5` times. 
