@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class EpisodeMetadata:
     def __init__(self, title):
         self.title = title
@@ -25,6 +26,7 @@ class EpisodeMetadata:
             return 265
         return 264
 
+
 class ShowMetadata:
     def __init__(self, results):
         self.text = results.text
@@ -35,8 +37,9 @@ class ShowMetadata:
     def get_rating(self):
         try:
             return float(self.text.split("wpdrv'>")[1].split('<')[0])
-        except:
+        except Exception:
             return -1
+
 
 class Hosters(Enum):
     PSARips = "download.psarips.net"
@@ -53,7 +56,7 @@ class Hosters(Enum):
     BayFiles = "bayfiles.com"
     AnonFiles = "anonfiles.com"
     SpeedDown = "speed-down.org"
-    Unknown = "zyzzyspoonshift1" # :P
+    Unknown = "zyzzyspoonshift1"  # :P
 
     @classmethod
     def getHoster(cls, url):

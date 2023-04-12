@@ -1,12 +1,16 @@
-import cfscrape, sys, os
-from psaripper.pageparser import parse_page
-from psaripper.metadata import Hosters
-from psaripper.PSAMedia import PSAMode
-from psaripper.PSAEntry import PSAEntry
-from psaripper.rss import get_psa_feed, generate_feed
-from psaripper.dump import get_hoster_dictionary, pretty_print, pretty_print_torr
+import os
+import sys
 
-SCRAPER = cfscrape.create_scraper()
+from psaripper.dump import (get_hoster_dictionary, pretty_print,
+                            pretty_print_torr)
+from psaripper.pageparser import parse_page
+from psaripper.PSAEntry import PSAEntry
+from psaripper.PSAMedia import PSAMode
+from psaripper.rss import generate_feed, get_psa_feed
+from psaripper.util import create_scraper
+
+SCRAPER = create_scraper()
+
 
 def mode_parse(arg):
     arg = arg.strip().lower()
@@ -17,6 +21,7 @@ def mode_parse(arg):
     elif arg == "720p" or arg == "hd":
         return PSAMode.HD
     return PSAMode.Full
+
 
 if __name__ == "__main__":
     MODE = PSAMode.Full
@@ -42,7 +47,7 @@ if __name__ == "__main__":
         MODE = mode_parse(input("Enter download mode (latest/full/1080p/720p) - "))
 
     entries, metadata = parse_page(url, SCRAPER, MODE)
-    if entries == None:
+    if not entries:
         print("Could not parse the page provided")
         sys.exit(-1)
 
@@ -59,7 +64,7 @@ if __name__ == "__main__":
         entry_json["Torrent"][title] = torrurls
         entry_json["DDL"][title] = ddlurls
         print(f"Processed - {title}")
-        
+
     with open(f'output/{showtitle}.log', 'w') as f:
         ddl_out = get_hoster_dictionary(entry_json["DDL"])
         f.write(pretty_print(ddl_out) + '\n\n' + pretty_print_torr(entry_json["Torrent"]))
