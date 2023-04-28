@@ -51,4 +51,6 @@ For documentation purposes, the following have been their changelog of my code s
 
 > 13/4/2023; 1:02 AM SGT: Exploit ouo.io shortner by forcing generation of OUO links on the 5th VstCnt through forced cookie injection. Thanks @Loli-Killer . Finally bypassed it again :)
 
-The script so far has been patched unsuccessfully `5` times. 
+> 29/4/2023; 1:04 AM SGT: Updated VisitCnt to 6 to force generate OUO links again. They probably added a new shortner to the mix.
+
+The script so far has been patched unsuccessfully `6` times. 
