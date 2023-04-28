@@ -1,5 +1,5 @@
 from psaripper.metadata import EpisodeMetadata
-from psaripper.util import decrypt_url, create_scraper
+from psaripper.util import create_scraper, decrypt_url
 
 
 class PSAEntry:
